@@ -1,4 +1,7 @@
 .rustlings-state.txt
+**/.idea
+**/*.iml
+**/.vscode
 solutions
 Cargo.lock
 target

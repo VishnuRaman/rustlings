@@ -28,6 +28,20 @@ mod my_module {
 
     // TODO: Complete the function.
     // pub fn transformer(input: ???) -> ??? { ??? }
+
+    pub fn transformer(input: Vec<(String, Command)>) -> Vec<String> {
+        let mut output: Vec<String> = vec![];
+        for (string, command) in input.iter() {
+            let mingle: String = match command {
+                Command::Uppercase => string.to_uppercase(),
+                Command::Trim => string.trim().to_string(),
+                Command::Append(value) => string.to_string() + &"bar".repeat(*value),
+                _ => panic!("Received non valid input"),
+            };
+            output.push(mingle);
+        }
+        output
+    }
 }
 
 fn main() {
@@ -36,13 +50,14 @@ fn main() {
 
 #[cfg(test)]
 mod tests {
+    use crate::my_module::transformer;
     // TODO: What do we need to import to have `transformer` in scope?
     // use ???;
     use super::Command;
 
     #[test]
     fn it_works() {
-        let input = vec![
+        let input: Vec<(String, Command)> = vec![
             ("hello".to_string(), Command::Uppercase),
             (" all roads lead to rome! ".to_string(), Command::Trim),
             ("foo".to_string(), Command::Append(1)),
